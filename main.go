@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/Barben360/texas-holdem-game/init"
+	initApp "github.com/Barben360/texas-holdem-game/init"
 	"github.com/sirupsen/logrus"
 )
 
@@ -18,7 +18,7 @@ func main() {
 	// Initializing app
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	app, err := init.Init(ctx)
+	app, err := initApp.Init(ctx)
 	if err != nil {
 		logrus.WithError(err).Error("could not initialize app, exiting")
 		os.Exit(1)

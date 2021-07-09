@@ -9,8 +9,8 @@ type Carder interface {
 	Draw(ctx context.Context, quantity int, cards Cards) (drawn Cards, remaining Cards, err error)
 	// Sort cards sorts cards by rank first then by suit
 	Sort(ctx context.Context, cards Cards, descendent bool) error
-	// Compare compares two cards by rank
+	// Less compares two cards by rank
 	// If equal is true, then ranks are the same
 	// If comp is false, then card1 <= card2, otherwise card1 >= card2. Undefined behavior if equal is true.
-	Compare(ctx context.Context, card1 Card, card2 Card) (equal bool, comp bool, err error)
+	Less(ctx context.Context, card1 Card, card2 Card) (equal bool, comp bool, err error)
 }

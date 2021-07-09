@@ -42,10 +42,10 @@ func (d *Default) Sort(ctx context.Context, cards card.Cards, descendent bool) e
 	return nil
 }
 
-// Compare compares two cards by rank
+// Less compares two cards by rank
 // If equal is true, then ranks are the same
-// If comp is false, then card1 < card2, otherwise card1 > card2. False if equal is true
-func (d *Default) Compare(ctx context.Context, card1 card.Card, card2 card.Card) (equal bool, comp bool, err error) {
+// If comp is false, then card1 > card2, otherwise card1 < card2. False if equal is true
+func (d *Default) Less(ctx context.Context, card1 card.Card, card2 card.Card) (equal bool, comp bool, err error) {
 	if card1.Rank == card2.Rank {
 		return true, false, nil
 	}
