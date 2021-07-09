@@ -37,3 +37,24 @@ type Card struct {
 
 // Represents a list of cards, top of the pile first
 type Cards []Card
+
+type CardsAsc Cards
+type CardsDesc Cards
+
+func (c CardsAsc) Len() int      { return len(c) }
+func (c CardsAsc) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
+func (c CardsAsc) Less(i, j int) bool {
+	if c[i].Rank == c[j].Rank {
+		return c[i].Suit < c[j].Suit
+	}
+	return c[i].Rank < c[j].Rank
+}
+
+func (c CardsDesc) Len() int      { return len(c) }
+func (c CardsDesc) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
+func (c CardsDesc) Less(i, j int) bool {
+	if c[i].Rank == c[j].Rank {
+		return c[i].Suit > c[j].Suit
+	}
+	return c[i].Rank > c[j].Rank
+}
