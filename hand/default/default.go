@@ -150,9 +150,10 @@ func (d *Default) check(ctx context.Context, cards card.Cards5) (hand.Hand, erro
 			}
 		}
 		if ret.Type == hand.HandType_ThreeOfAKind {
-			// Shifting ranks 2 to rank 1
+			// Shifting ranks 2 to rank 1 and rand 3 to rank 2
 			ret.Ranks[1] = ret.Ranks[2]
-			ret.Ranks[2] = card.CardRank_None
+			ret.Ranks[2] = ret.Ranks[3]
+			ret.Ranks[3] = card.CardRank_None
 		}
 		return ret, nil
 	}
