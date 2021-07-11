@@ -1,4 +1,4 @@
-![example workflow](https://github.com/Barben360/texas-holdem-game/workflows/go/badge.svg)
+![build and test](https://github.com/Barben360/texas-holdem-game/actions/workflows/go.yml/badge.svg)
 
 # Texas Hold'em game
 
