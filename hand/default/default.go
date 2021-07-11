@@ -39,14 +39,10 @@ func (d *Default) check(ctx context.Context, cards card.Cards5) (hand.Hand, erro
 	ret := hand.Hand{
 		Type: hand.HandType_SingleCard,
 	}
-	// Copying input cards
-	var cardsCpy card.Cards5
-	for i, elt := range cards {
-		cardsCpy[i] = elt
-	}
 
 	// Sorting cards
-	err := d.carder.Sort5(ctx, cardsCpy, false)
+	// here cards object is a copy as it is a const size slice
+	err := d.carder.Sort(ctx, cards[:], false)
 	if err != nil {
 		errMsg := "could not check cards"
 		logrus.WithError(err).
@@ -55,18 +51,18 @@ func (d *Default) check(ctx context.Context, cards card.Cards5) (hand.Hand, erro
 	}
 
 	// Checking hand
-	firstCardSuit := cardsCpy[0].Suit
+	firstCardSuit := cards[0].Suit
 	sameSuit := true
 	// Checking if same suit
 	for i := 1; i < 5; i++ {
-		if cardsCpy[i].Suit != firstCardSuit {
+		if cards[i].Suit != firstCardSuit {
 			sameSuit = false
 			break
 		}
 	}
 	isStraight := true
 	for i := 1; i < 5; i++ {
-		if cardsCpy[i].Rank != cardsCpy[i-1].Rank+card.CardRank(1) {
+		if cards[i].Rank != cards[i-1].Rank+card.CardRank(1) {
 			isStraight = false
 			break
 		}
@@ -80,13 +76,13 @@ func (d *Default) check(ctx context.Context, cards card.Cards5) (hand.Hand, erro
 		}
 		d.ranksMapPool.Put(rankCount)
 	}()
-	for _, c := range cardsCpy {
+	for _, c := range cards {
 		rankCount[c.Rank]++
 	}
 	if len(rankCount) == 5 {
 		// Ranks will be forcefully ordered by decreasing order (includes all flushes, straight and single card)
 		for i := 0; i < 5; i++ {
-			ret.Ranks[i] = cardsCpy[4-i].Rank
+			ret.Ranks[i] = cards[4-i].Rank
 		}
 	}
 

@@ -37,50 +37,17 @@ type Card struct {
 	Rank CardRank
 }
 
-// Represents a list of cards, top of the pile first
+// List of cards
+type Cards []Card
+
+// List of 2 cards
 type Cards2 [2]Card
+
+// List of 5 cards
 type Cards5 [5]Card
+
+// List of 7 cards
 type Cards7 [7]Card
+
+// List of 52 cards
 type Cards52 [52]Card
-
-type CardsAsc2 Cards2
-type CardsDesc2 Cards2
-
-type CardsAsc5 Cards5
-type CardsDesc5 Cards5
-
-func (c CardsAsc2) Len() int      { return len(c) }
-func (c CardsAsc2) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
-func (c CardsAsc2) Less(i, j int) bool {
-	if c[i].Rank == c[j].Rank {
-		return c[i].Suit < c[j].Suit
-	}
-	return c[i].Rank < c[j].Rank
-}
-
-func (c CardsDesc2) Len() int      { return len(c) }
-func (c CardsDesc2) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
-func (c CardsDesc2) Less(i, j int) bool {
-	if c[i].Rank == c[j].Rank {
-		return c[i].Suit > c[j].Suit
-	}
-	return c[i].Rank > c[j].Rank
-}
-
-func (c CardsAsc5) Len() int      { return len(c) }
-func (c CardsAsc5) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
-func (c CardsAsc5) Less(i, j int) bool {
-	if c[i].Rank == c[j].Rank {
-		return c[i].Suit < c[j].Suit
-	}
-	return c[i].Rank < c[j].Rank
-}
-
-func (c CardsDesc5) Len() int      { return len(c) }
-func (c CardsDesc5) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
-func (c CardsDesc5) Less(i, j int) bool {
-	if c[i].Rank == c[j].Rank {
-		return c[i].Suit > c[j].Suit
-	}
-	return c[i].Rank > c[j].Rank
-}

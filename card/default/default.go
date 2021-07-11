@@ -18,16 +18,26 @@ func New(ctx context.Context) (card.Carder, error) {
 }
 
 // Shuffle shuffles cards
-func (d *Default) Shuffle52(ctx context.Context, cards card.Cards52) error {
+func (d *Default) Shuffle52(ctx context.Context, cards *card.Cards52) error {
 	rand.Shuffle(len(cards), func(i, j int) { cards[i], cards[j] = cards[j], cards[i] })
 	return nil
 }
 
-func (d *Default) Sort5(ctx context.Context, cards card.Cards5, descendent bool) error {
+func (d *Default) Sort(ctx context.Context, cards card.Cards, descendent bool) error {
 	if descendent {
-		sort.Sort(card.CardsDesc5(cards))
+		sort.Slice(cards, func(i, j int) bool {
+			if cards[i].Rank == cards[j].Rank {
+				return cards[i].Suit > cards[j].Suit
+			}
+			return cards[i].Rank > cards[j].Rank
+		})
 	} else {
-		sort.Sort(card.CardsAsc5(cards))
+		sort.Slice(cards, func(i, j int) bool {
+			if cards[i].Rank == cards[j].Rank {
+				return cards[i].Suit < cards[j].Suit
+			}
+			return cards[i].Rank < cards[j].Rank
+		})
 	}
 	return nil
 }

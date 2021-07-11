@@ -37,5 +37,5 @@ func (d *Default) New(ctx context.Context) (deck.Deck, error) {
 
 // Shuffle deck
 func (d *Default) Shuffle(ctx context.Context, deck deck.Deck) error {
-	return d.carder.Shuffle52(ctx, deck.Cards)
+	return d.carder.Shuffle52(ctx, &deck.Cards)
 }
