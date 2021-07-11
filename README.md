@@ -1,4 +1,4 @@
-![go version](https://img.shields.io/github/go-mod/go-version/Barben360/texas-holdem-game) ![build and test status](https://github.com/Barben360/texas-holdem-game/actions/workflows/go.yml/badge.svg) ![Coverage status](https://coveralls.io/repos/github/Barben360/texas-holdem-game/badge.svg?branch=main)
+![go version](https://img.shields.io/github/go-mod/go-version/Barben360/texas-holdem-game) ![build and test status](https://github.com/Barben360/texas-holdem-game/actions/workflows/go.yml/badge.svg) ![Coverage status](https://coveralls.io/repos/github/Barben360/texas-holdem-game/badge.svg?branch=main)() [![Go Report Card](https://goreportcard.com/badge/github.com/Barben360/texas-holdem-game)](https://goreportcard.com/report/github.com/Barben360/texas-holdem-game) 
 
 # Texas Hold'em game
 
