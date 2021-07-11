@@ -12,7 +12,7 @@ import (
 
 const nShuffles int = 1000
 
-var carder card.Carder
+var carder *Default
 
 func TestMain(m *testing.M) {
 	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
@@ -21,7 +21,7 @@ func TestMain(m *testing.M) {
 	if err != nil {
 		os.Exit(1)
 	}
-	carder = c
+	carder = c.(*Default)
 	os.Exit(m.Run())
 }
 func TestShuffle52(t *testing.T) {
@@ -257,7 +257,7 @@ func TestSort(t *testing.T) {
 			t.Fatal(err)
 		}
 		if !reflect.DeepEqual(td.InputCards, td.ExpectedSortedCards) {
-			t.Fatalf("Expected input cards and sorted cards are not the same\n+ %+v\n- %+v", td.ExpectedSortedCards, td.InputCards)
+			t.Fatalf("expected input cards and sorted cards are not the same\n+ %+v\n- %+v", td.ExpectedSortedCards, td.InputCards)
 		}
 	}
 }
