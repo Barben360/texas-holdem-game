@@ -1,4 +1,4 @@
-[![Go Actions Status](https://github.com/Barben360/texas-holdem-game/workflows/go/badge.svg)](https://github.com/Barben360/texas-holdem-game/actions)
+![example workflow](https://github.com/Barben360/texas-holdem-game/workflows/go/badge.svg)
 
 # Texas Hold'em game
 
