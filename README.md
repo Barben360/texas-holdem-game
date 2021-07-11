@@ -1,4 +1,4 @@
-![go version](https://img.shields.io/github/go-mod/go-version/Barben360/texas-holdem-game) ![build and test status](https://github.com/Barben360/texas-holdem-game/actions/workflows/go.yml/badge.svg)
+![go version](https://img.shields.io/github/go-mod/go-version/Barben360/texas-holdem-game) ![build and test status](https://github.com/Barben360/texas-holdem-game/actions/workflows/go.yml/badge.svg) 
 
 # Texas Hold'em game
 
