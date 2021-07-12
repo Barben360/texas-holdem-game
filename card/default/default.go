@@ -6,7 +6,6 @@ import (
 	"sort"
 
 	"github.com/Barben360/texas-holdem-game/card"
-	"github.com/Barben360/texas-holdem-game/errors"
 )
 
 // Default is the default carder implementation
@@ -19,35 +18,26 @@ func New(ctx context.Context) (card.Carder, error) {
 }
 
 // Shuffle shuffles cards
-func (d *Default) Shuffle(ctx context.Context, cards card.Cards) error {
+func (d *Default) Shuffle52(ctx context.Context, cards *card.Cards52) error {
 	rand.Shuffle(len(cards), func(i, j int) { cards[i], cards[j] = cards[j], cards[i] })
 	return nil
 }
 
-// Draw draws cards from top of pile. If not enough cards, draws all the cards and returns ErrResourceExhausted
-func (d *Default) Draw(ctx context.Context, quantity int, cards card.Cards) (drawn card.Cards, remaining card.Cards, err error) {
-	if quantity > len(cards) {
-		return cards, card.Cards{}, errors.Errorf(errors.ErrResourceExhausted, "not enough cards to draw")
-	}
-	return cards[:quantity], cards[quantity:], nil
-}
-
-// Sort cards sorts cards by rank first then by suit
 func (d *Default) Sort(ctx context.Context, cards card.Cards, descendent bool) error {
 	if descendent {
-		sort.Sort(card.CardsDesc(cards))
+		sort.Slice(cards, func(i, j int) bool {
+			if cards[i].Rank == cards[j].Rank {
+				return cards[i].Suit > cards[j].Suit
+			}
+			return cards[i].Rank > cards[j].Rank
+		})
 	} else {
-		sort.Sort(card.CardsAsc(cards))
+		sort.Slice(cards, func(i, j int) bool {
+			if cards[i].Rank == cards[j].Rank {
+				return cards[i].Suit < cards[j].Suit
+			}
+			return cards[i].Rank < cards[j].Rank
+		})
 	}
 	return nil
-}
-
-// Less compares two cards by rank
-// If equal is true, then ranks are the same
-// If comp is false, then card1 > card2, otherwise card1 < card2. False if equal is true
-func (d *Default) Less(ctx context.Context, card1 card.Card, card2 card.Card) (equal bool, comp bool, err error) {
-	if card1.Rank == card2.Rank {
-		return true, false, nil
-	}
-	return false, card1.Rank < card2.Rank, nil
 }
