@@ -4,29 +4,31 @@ package card
 type CardSuit int8
 
 const (
-	CardSuit_Club    CardSuit = 0
-	CardSuit_Diamond CardSuit = 1
-	CardSuit_Hearts  CardSuit = 2
-	CardSuit_Spades  CardSuit = 3
+	CardSuit_None    CardSuit = 0
+	CardSuit_Club    CardSuit = 1
+	CardSuit_Diamond CardSuit = 2
+	CardSuit_Hearts  CardSuit = 3
+	CardSuit_Spades  CardSuit = 4
 )
 
 // CardRank is the rank of a card, ordered by value (as for poker)
 type CardRank int8
 
 const (
-	CardRank_2     CardRank = 0
-	CardRank_3     CardRank = 1
-	CardRank_4     CardRank = 2
-	CardRank_5     CardRank = 3
-	CardRank_6     CardRank = 4
-	CardRank_7     CardRank = 5
-	CardRank_8     CardRank = 6
-	CardRank_9     CardRank = 7
-	CardRank_10    CardRank = 8
-	CardRank_Jack  CardRank = 9
-	CardRank_Queen CardRank = 10
-	CardRank_King  CardRank = 11
-	CardRank_Ace   CardRank = 12
+	CardRank_None  CardRank = 0
+	CardRank_2     CardRank = 1
+	CardRank_3     CardRank = 2
+	CardRank_4     CardRank = 3
+	CardRank_5     CardRank = 4
+	CardRank_6     CardRank = 5
+	CardRank_7     CardRank = 6
+	CardRank_8     CardRank = 7
+	CardRank_9     CardRank = 8
+	CardRank_10    CardRank = 9
+	CardRank_Jack  CardRank = 10
+	CardRank_Queen CardRank = 11
+	CardRank_King  CardRank = 12
+	CardRank_Ace   CardRank = 13
 )
 
 // Card represents a card
@@ -35,26 +37,17 @@ type Card struct {
 	Rank CardRank
 }
 
-// Represents a list of cards, top of the pile first
+// List of cards
 type Cards []Card
 
-type CardsAsc Cards
-type CardsDesc Cards
+// List of 2 cards
+type Cards2 [2]Card
 
-func (c CardsAsc) Len() int      { return len(c) }
-func (c CardsAsc) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
-func (c CardsAsc) Less(i, j int) bool {
-	if c[i].Rank == c[j].Rank {
-		return c[i].Suit < c[j].Suit
-	}
-	return c[i].Rank < c[j].Rank
-}
+// List of 5 cards
+type Cards5 [5]Card
 
-func (c CardsDesc) Len() int      { return len(c) }
-func (c CardsDesc) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
-func (c CardsDesc) Less(i, j int) bool {
-	if c[i].Rank == c[j].Rank {
-		return c[i].Suit > c[j].Suit
-	}
-	return c[i].Rank > c[j].Rank
-}
+// List of 7 cards
+type Cards7 [7]Card
+
+// List of 52 cards
+type Cards52 [52]Card

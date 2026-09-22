@@ -6,7 +6,6 @@ import (
 	"time"
 
 	cardDft "github.com/Barben360/texas-holdem-game/card/default"
-	"github.com/Barben360/texas-holdem-game/deck"
 )
 
 func TestDeck(t *testing.T) {
@@ -24,13 +23,7 @@ func TestDeck(t *testing.T) {
 	}
 
 	ctx, cancel = context.WithTimeout(context.Background(), 1*time.Second)
-	_, err = decker.New(ctx, deck.Type_UNKNOWN)
-	cancel()
-	if err == nil {
-		t.Fatal("creating new deck with unknown type should lead to an error")
-	}
-	ctx, cancel = context.WithTimeout(context.Background(), 1*time.Second)
-	dck, err := decker.New(ctx, deck.Type_52)
+	dck, err := decker.New(ctx)
 	cancel()
 	if err != nil {
 		t.Fatal(err)
